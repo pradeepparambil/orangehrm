@@ -10,9 +10,9 @@ public class JobShiftTest extends TestBase {
     public void addJobShift() {    // Adding job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.addBtnClick("ShiftAW2");
+        JSPage.addBtnClick("ShiftAW3");
         JSPage.selectDropdown("09:15", "16:00");
-        JSPage.SelectEmployee("Goutam Ganesh");
+        JSPage.SelectEmployee("Lisa Andrews");
         JSPage.clickAddEmp();
         JSPage.clickSave("Successfully Saved");
     }

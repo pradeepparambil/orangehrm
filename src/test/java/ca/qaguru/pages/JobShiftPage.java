@@ -20,32 +20,26 @@ public class JobShiftPage extends PageBase {
     private String btnSave = "//*[@id='btnSave']";       // SAVE button
     private String btnCancel = "//*[@id='btnCancel']";    // Cancel button
     private String workShift = "//*[@id='search-results']//following::*[text()='Work Shifts']";
-    private String selRecord = "//*[@name='chkSelectRow[]']//following::*[@value='X']";
+    private String selRecord = "//*[@checkbox']//following::*[@value='X']";
     private String actualAlertMsg = "//*[@id='customerList']//following::*[text()='Delete records?']";
     private String btnAlertOK = "//*[@id='customerList']//following::*[@value='Ok']";
     private String btnAlertCancel = "//*[@id='customerList']//following::*[@value='Cancel']";
     private String msgSuccess = "//*[@id='successBodyEdit']";
+    private String msgDelete = "//*[@id='successBodyDelete']";
 
     public JobShiftPage(WebDriver driver) {
         super(driver);
     }
 
-    public void clickDeleteBtn(String expAlertMsg) {
+    public void clickDeleteBtn(String expDeleteMsg) {
         click(By.xpath(btnDelete));
-        // Confirming delete alert
-        Alert alertMsg = driver.switchTo().alert();
-        sleep(100);
-        alertMsg.accept();
-// By.xpath(actualAlertMsg)
-//        Boolean confirm = isElementVisible(By.xpath(actualAlertMsg));
-//        System.out.println(confirm);
-//        Assert.assertEquals(alertMsg.getText(),expAlertMsg,"Alert did not pop up !");
-//        click(By.xpath(btnAlertOK));
+        click(By.xpath(btnAlertOK));
+      // check message successfully deleted
+        Assert.assertEquals(By.xpath(msgDelete),expDeleteMsg,"Record not Deleted");
+
     }
     public void clickCancelDeleteBtn(String expAlertMsg) {
         click(By.xpath(btnDelete));
-        // Confirming delete alert
-        Assert.assertEquals(By.xpath(actualAlertMsg),expAlertMsg,"Alert did not pop up !");
         click(By.xpath(btnAlertCancel));
     }
 

@@ -33,7 +33,7 @@ public class JobShiftTest extends TestBase {
     public void cancelDeleteShifts() {    // Cancel Delete job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.selCheckBox("3");
+        JSPage.selCheckBox("4");
         JSPage.clickCancelDeleteBtn("Delete records?");
     }
 
@@ -42,6 +42,6 @@ public class JobShiftTest extends TestBase {
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
         JSPage.selCheckBox("3");
-        JSPage.clickDeleteBtn("Delete records?");
+        JSPage.clickDeleteBtn("Successfully Deleted");
     }
 }

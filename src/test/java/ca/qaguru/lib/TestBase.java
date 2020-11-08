@@ -19,8 +19,8 @@ public class TestBase {
     @BeforeMethod
     public void setup(){
         driver = new ChromeDriver();
-//        driver = new FirefoxDriver();
-//        driver.manage().window().maximize();
+       // driver = new FirefoxDriver();
+        driver.manage().window().maximize();
         driver.get(BASE_URL);
     }
 

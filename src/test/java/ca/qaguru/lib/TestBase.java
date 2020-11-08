@@ -17,6 +17,7 @@ public class TestBase {
     @BeforeMethod
     public void setup(){
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         driver.get(BASE_URL);
     }
 

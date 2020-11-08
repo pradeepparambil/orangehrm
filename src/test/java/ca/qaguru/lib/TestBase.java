@@ -4,9 +4,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.openqa.selenium.safari.SafariDriver;
+import org.testng.annotations.*;
 
 public class TestBase {
     protected WebDriver driver;
@@ -17,10 +16,21 @@ public class TestBase {
         WebDriverManager.firefoxdriver().setup();
     }
     @BeforeMethod
-    public void setup(){
-        driver = new ChromeDriver();
-//        driver = new FirefoxDriver();
-//        driver.manage().window().maximize();
+    @Parameters("browser")
+    public void setup(@Optional("chrome") String browser){
+        switch (browser){
+            case "chrome":
+                driver = new ChromeDriver();
+                break;
+            case "firefox" :
+                driver = new FirefoxDriver();
+                break;
+            case "safari":
+                driver = new SafariDriver();
+                break;
+        }
+
+        driver.manage().window().maximize();
         driver.get(BASE_URL);
     }
 

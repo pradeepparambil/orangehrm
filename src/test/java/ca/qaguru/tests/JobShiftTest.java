@@ -10,38 +10,31 @@ public class JobShiftTest extends TestBase {
     public void addJobShift() {    // Adding job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.addBtnClick("ShiftAW3");
-        JSPage.selectDropdown("09:15", "16:00");
-        JSPage.SelectEmployee("Lisa Andrews");
-        JSPage.clickAddEmp();
-        JSPage.clickSave("Successfully Saved");
+        JSPage.addJobShift("ShiftAW3", "09:15", "16:00", "Lisa Andrews", "Successfully Saved");
     }
+//
 
     @Test
     public void addJobShiftCancel() {    // Cancelling job shift Add
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.addBtnClick("ShiftAW3");
-        JSPage.selectDropdown("09:15", "16:00");
-        JSPage.SelectEmployee("Alice Duval");
-        JSPage.clickCancel();
+        JSPage.addJobShiftCancel("ShiftAW3", "09:15", "16:00", "Charlie Carter");
     }
-
 
 
     @Test
     public void cancelDeleteShifts() {    // Cancel Delete job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.selCheckBox("4");
-        JSPage.clickCancelDeleteBtn("Delete records?");
+        JSPage.cancelDeleteShifts("4");
     }
 
     @Test
     public void deleteShifts() {    // Delete job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.selCheckBox("3");
-        JSPage.clickDeleteBtn("Successfully Deleted");
+        JSPage.addJobShift("ShiftAW4", "08:15", "16:00", "Cecil Bonaparte", "Successfully Saved");
+        JSPage.deleteShifts("3","successfully Deleted");
+
     }
 }

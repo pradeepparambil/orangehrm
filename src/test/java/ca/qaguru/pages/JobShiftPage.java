@@ -38,7 +38,7 @@ public class JobShiftPage extends PageBase {
         Assert.assertEquals(By.xpath(msgDelete),expDeleteMsg,"Record not Deleted");
 
     }
-    public void clickCancelDeleteBtn(String expAlertMsg) {
+    public void clickCancelDeleteBtn() {
         click(By.xpath(btnDelete));
         click(By.xpath(btnAlertCancel));
     }
@@ -47,8 +47,7 @@ public class JobShiftPage extends PageBase {
     public void addBtnClick(String ShiftName) {
         click(By.xpath(btnAdd));
         setText(By.xpath(txtShift), ShiftName);
-        //select(By.xpath(selWSFrom),FromTime);
-        // select(By.xpath(selWSTo),ToTime);
+
     }
 
     public void selectDropdown(String FromTime, String ToTime) {
@@ -87,4 +86,26 @@ public class JobShiftPage extends PageBase {
         click(By.xpath(selRecord.replace("X", value)));
     }
 
+    public void addJobShift(String ShiftName,String FromTime, String ToTime,String EmpName,String msgExp) {
+        addBtnClick(ShiftName);
+        selectDropdown(FromTime,ToTime);
+        SelectEmployee(EmpName);
+        clickAddEmp();
+        clickSave(msgExp);
+    }
+
+    public void addJobShiftCancel(String ShiftName,String FromTime, String ToTime,String EmpName){
+        addBtnClick(ShiftName);
+        selectDropdown(FromTime,ToTime);
+        SelectEmployee(EmpName);
+        clickCancel();
+    }
+    public void deleteShifts(String Record, String msg){
+        selCheckBox(Record);
+        clickDeleteBtn(msg);
+    }
+    public void cancelDeleteShifts(String Record){
+        selCheckBox(Record);
+        clickCancelDeleteBtn();
+    }
 }

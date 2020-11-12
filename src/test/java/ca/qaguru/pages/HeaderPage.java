@@ -38,7 +38,7 @@ public class HeaderPage extends PageBase {
             sleep(MENU_SELECTION_DELAY);
             click(byMenu);
             if(menuLevel==1) {
-                int yOffset = rectangle.getY() + 500;
+                int yOffset = rectangle.getY() + rectangle.height+10;
                 if(yOffset>dimension.height){
                     yOffset = dimension.height-1;
                 }

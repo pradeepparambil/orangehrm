@@ -34,8 +34,8 @@ public class TestBase {
         driver.get(BASE_URL);
     }
 
-//    @AfterMethod
-//    public void clear(){
-//        driver.quit();
-//    }
+    @AfterMethod
+    public void clear(){
+        driver.quit();
+    }
 }

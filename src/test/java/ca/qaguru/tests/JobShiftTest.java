@@ -10,7 +10,7 @@ public class JobShiftTest extends TestBase {
     public void addJobShift() {    // Adding job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.addJobShift("ShiftAW8", "09:15", "16:00", "Nathan Elliot", "Successfully Saved");
+        JSPage.addJobShift( "ADS1","09:15", "16:00", "Cecil Bonaparte", "Successfully Saved");
     }
 
     @Test
@@ -31,7 +31,7 @@ public class JobShiftTest extends TestBase {
     public void deleteShifts() {    // Delete job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.addJobShift("ShiftAW4", "08:15", "16:00", "Cecil Bonaparte", "Successfully Saved");
+        JSPage.addJobShift( "AWM1","08:15", "16:00", "Cecil Bonaparte", "Successfully Saved");
         JSPage.deleteShifts("3","successfully Deleted");
     }
 
@@ -39,7 +39,7 @@ public class JobShiftTest extends TestBase {
     public void modifyJobShift() {    // Modifying job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.addJobShift("ShiftAWM1", "09:15", "16:00", "Linda Jane Anderson", "Successfully Saved");
-        JSPage.modifyJobShift("ShiftAWM1","ShiftAWM2","08:30","16:30","Odis Adalwin");
+        JSPage.addJobShift("ShiftAWC1", "09:15", "16:00", "Linda Jane Anderson", "Successfully Saved");
+        JSPage.modifyJobShift("ShiftAWC1","ShiftAWM2","08:30","16:30","Odis Adalwin");
     }
 }

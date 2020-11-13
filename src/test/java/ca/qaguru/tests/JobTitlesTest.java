@@ -8,7 +8,7 @@ public class JobTitlesTest extends TestBase {
     @Test
     public void addJobTitle(){
         new LoginPage(driver)
-                .login("admin", "admin123")
+                .login("Admin", "admin123")
                 .selectMenu("Admin|Job|Job Titles");
     }
 }

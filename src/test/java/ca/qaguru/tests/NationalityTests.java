@@ -15,5 +15,13 @@ public class NationalityTests extends TestBase {
                 nationalityPage.addNationality();
 
     }
+    @Test
+    public void deleteNationality(){
+        new LoginPage(driver)
+                .login("admin", "admin123")
+                .selectMenu("Admin|Nationalities");
+        NationalityPage nationalityPage =new NationalityPage(driver);
+        nationalityPage.deleteNationality();
+    }
 
 }

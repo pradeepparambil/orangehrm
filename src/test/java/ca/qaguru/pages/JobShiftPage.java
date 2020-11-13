@@ -66,38 +66,6 @@ public class JobShiftPage extends PageBase {
             }
         }
     }
-//    public void addJobShift(String ShiftName,String FromTime, String ToTime,String EmpName,String msgExp) {
-//
-//        //  addBtnClick(ShiftName);
-//        click(By.xpath(btnAdd));
-//        String ShiftName1 = "SHA"+ rand.nextInt(upperbound);
-//        setText(By.xpath(txtShift), ShiftName1);
-//        //   selectDropdown(FromTime,ToTime);
-//        select(By.xpath(selWSFrom), FromTime);
-//        select(By.xpath(selWSTo), ToTime);
-//        select(By.xpath(selAvlEmp), EmpName);  //  SelectEmployee(EmpName);
-//        click(By.xpath(clkAdd));           // clickAddEmp();
-//        click(By.xpath(btnSave));  // clickSave(msgExp);
-//
-//        // check if records added to resultTable
-//        Assert.assertTrue(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
-//                ,"Record not added");
-//
-//    }
-//
-//    public void addJobShiftCancel(String ShiftName,String FromTime, String ToTime,String EmpName){
-//        // addBtnClick(ShiftName);
-//        click(By.xpath(btnAdd));
-//        String ShiftName1 = "SHA"+ rand.nextInt(upperbound);
-//        setText(By.xpath(txtShift), ShiftName);
-//        select(By.xpath(selWSFrom), FromTime);         //   selectDropdown(FromTime,ToTime);
-//        select(By.xpath(selWSTo), ToTime);
-//        select(By.xpath(selAvlEmp), EmpName);          //  SelectEmployee(EmpName);
-//        click(By.xpath(btnCancel));                    //clickCancel;
-//        //Check is "work Shifts" is visible
-//       Assert.assertFalse(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
-//               ,"Record added");
-//    }
 
     public void deleteShifts(String Record, String msg){
         // selCheckBox;

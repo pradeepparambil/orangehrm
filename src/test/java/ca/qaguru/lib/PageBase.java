@@ -48,7 +48,7 @@ public class PageBase {
 //            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", we);
             Actions action = new Actions(driver);
             action.moveToElement(we).build().perform();
-            log.debug("mouseHover({}) done sucessfully",by);
+            log.debug("mouseHover({}) done successfully",by);
 
         } catch (StaleElementReferenceException exception) {
             sleep(REATTEMPT_DELAY);
@@ -64,7 +64,7 @@ public class PageBase {
         try {
             Actions action = new Actions(driver);
             action.moveByOffset(offsetX,offsetY).build().perform();
-            log.debug("mouseMove({},{}) done sucessfully",offsetX,offsetY);
+            log.debug("mouseMove({},{}) done successfully",offsetX,offsetY);
 
         } catch (StaleElementReferenceException exception) {
             sleep(REATTEMPT_DELAY);

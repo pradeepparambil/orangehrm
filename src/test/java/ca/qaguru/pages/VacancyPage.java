@@ -35,11 +35,11 @@ public class VacancyPage extends PageBase {
         return driver.findElement(By.xpath(vacancyName));
     }
 
-    public void addNewVacancy(String jobTitle,String candidateName, String hiringManager ){
+    public void addNewVacancy(String jobTitle, String vacancyName, String hiringManager ){
         reachVacancyPage();
         driver.findElement(By.xpath(addBtn)).click();
         select(By.xpath(selectJobTitle),jobTitle);
-        driver.findElement(By.xpath(addName)).sendKeys(candidateName);
+        driver.findElement(By.xpath(addName)).sendKeys(vacancyName);
         driver.findElement(By.xpath(hiringMngr)).sendKeys(hiringManager);
         driver.findElement(By.xpath(descriptionBox)).sendKeys("Testing the description Box");
         driver.findElement(By.xpath(statusBtn)).isSelected();
@@ -48,14 +48,14 @@ public class VacancyPage extends PageBase {
         Assert.assertTrue(isElementPresent(By.xpath(fadingMsg)),"Fading message not displayed");
     }
 
-    public void addDuplicateVacancy(String jobTitle,String candidateName, String hiringManager){
+    public void addDuplicateVacancy(String jobTitle, String vacancyName, String hiringManager){
 
-        addNewVacancy(jobTitle, candidateName, hiringManager);
+        addNewVacancy(jobTitle, vacancyName, hiringManager);
         driver.findElement(By.xpath(backBtn)).click();
 
         driver.findElement(By.xpath(addBtn)).click();
         select(By.xpath(selectJobTitle),jobTitle);
-        driver.findElement(By.xpath(addName)).sendKeys(candidateName);
+        driver.findElement(By.xpath(addName)).sendKeys(vacancyName);
         driver.findElement(By.xpath(hiringMngr)).sendKeys(hiringManager);
         driver.findElement(By.xpath(descriptionBox)).sendKeys("Testing the description Box");
         driver.findElement(By.xpath(statusBtn)).isSelected();

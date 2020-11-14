@@ -39,7 +39,7 @@ public class JobShiftTest extends TestBase {
     public void modifyJobShift() {    // Modifying job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.commonAdd("add","ShiftAWC1", "09:15", "16:00", "Linda Jane Anderson");
+        JSPage.commonAdd("add","ShiftAWC1", "09:15", "16:00", "Russel Hamilton");
         JSPage.modifyJobShift("ShiftAWC1","ShiftAWM2","08:30","16:30","Odis Adalwin");
     }
 }

@@ -30,7 +30,7 @@ public class JobShiftPage extends PageBase {
     private String msgSuccess = "//*[@id='successBodyEdit']";
     private String msgDelete = "//*[@id='successBodyDelete']";
     private String editShift = "//*[@id='resultTable']//following::*[text()='XXX']";
-    private String shiftName;
+    private String ShiftName1;
 
     public JobShiftPage(WebDriver driver) {
         super(driver);
@@ -85,7 +85,7 @@ public class JobShiftPage extends PageBase {
     }
 
     public void modifyJobShift(String oldShift,String newShift,String FromTime, String ToTime,String EmpName){
-        click(By.xpath(editShift.replace("XXX",oldShift)));   // click the selected shift
+        click(By.xpath(editShift.replace("XXX",ShiftName1)));   // click the selected shift
         setText(By.xpath(txtShift), newShift);
         select(By.xpath(selWSFrom), FromTime);          //   selectDropdown(FromTime,ToTime);
         select(By.xpath(selWSTo), ToTime);

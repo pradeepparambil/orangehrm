@@ -39,9 +39,9 @@ public class JobShiftPage extends PageBase {
     Random rand = new Random();
     int upperbound = 5;
 
-    public void commonAdd(String action,String ShiftName,String FromTime, String ToTime,String EmpName){
+    public void commonAdd(String action,String FromTime, String ToTime,String EmpName){
         click(By.xpath(btnAdd));
-        String ShiftName1 = "SHA"+ rand.nextInt(upperbound);
+        this.ShiftName1 = "SHA"+ rand.nextInt(upperbound);
         setText(By.xpath(txtShift), ShiftName1);
         //   selectDropdown(FromTime,ToTime);
         select(By.xpath(selWSFrom), FromTime);
@@ -84,7 +84,7 @@ public class JobShiftPage extends PageBase {
         click(By.xpath(btnAlertCancel));
     }
 
-    public void modifyJobShift(String oldShift,String newShift,String FromTime, String ToTime,String EmpName){
+    public void modifyJobShift(String newShift,String FromTime, String ToTime,String EmpName){
         click(By.xpath(editShift.replace("XXX",ShiftName1)));   // click the selected shift
         setText(By.xpath(txtShift), newShift);
         select(By.xpath(selWSFrom), FromTime);          //   selectDropdown(FromTime,ToTime);

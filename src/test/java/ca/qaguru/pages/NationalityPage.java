@@ -13,7 +13,7 @@ public class NationalityPage extends PageBase {
 
         super(driver);
     }
-    private String btnAdd ="//input[@id ='btnAdd']";
+    private String btnAdd ="//input[@id='btnAdd']";
     private String txtName ="//input[@id='nationality_name']";
     private String btnSave="//input[@id='btnSave']";
     private String lblNationality = "//*[text()='XXX']";

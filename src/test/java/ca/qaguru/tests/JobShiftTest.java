@@ -10,38 +10,36 @@ public class JobShiftTest extends TestBase {
     public void addJobShift() {    // Adding job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.addBtnClick("ShiftAW3");
-        JSPage.selectDropdown("09:15", "16:00");
-        JSPage.SelectEmployee("Lisa Andrews");
-        JSPage.clickAddEmp();
-        JSPage.clickSave("Successfully Saved");
+        JSPage.commonAdd("add","09:15", "16:00", "Linda Jane Anderson");
     }
 
     @Test
     public void addJobShiftCancel() {    // Cancelling job shift Add
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.addBtnClick("ShiftAW3");
-        JSPage.selectDropdown("09:15", "16:00");
-        JSPage.SelectEmployee("Alice Duval");
-        JSPage.clickCancel();
+        JSPage.commonAdd("addCancel","09:15", "16:00", "Charlie Carter");
     }
-
-
 
     @Test
     public void cancelDeleteShifts() {    // Cancel Delete job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.selCheckBox("4");
-        JSPage.clickCancelDeleteBtn("Delete records?");
+        JSPage.cancelDeleteShifts("4");
     }
 
     @Test
     public void deleteShifts() {    // Delete job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.selCheckBox("3");
-        JSPage.clickDeleteBtn("Successfully Deleted");
+        JSPage.commonAdd("add","08:15", "16:00", "Dominic Chase");
+        JSPage.deleteShifts("3","successfully Deleted");
+    }
+
+    @Test
+    public void modifyJobShift() {    // Modifying job shift
+        new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
+        JobShiftPage JSPage = new JobShiftPage(driver);
+        JSPage.commonAdd("add", "09:15", "16:00", "Russel Hamilton");
+        JSPage.modifyJobShift("ShiftAWM2","08:30","16:30","Odis Adalwin");
     }
 }

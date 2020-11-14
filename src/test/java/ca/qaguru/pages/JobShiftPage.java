@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.util.Random;
+
 public class JobShiftPage extends PageBase {
     private String btnAdd = "//*[@id='btnAdd']";
     private String btnDelete = "//*[@id='btnDelete']";
@@ -20,71 +22,77 @@ public class JobShiftPage extends PageBase {
     private String btnSave = "//*[@id='btnSave']";       // SAVE button
     private String btnCancel = "//*[@id='btnCancel']";    // Cancel button
     private String workShift = "//*[@id='search-results']//following::*[text()='Work Shifts']";
+    private String recTable = "//*[@id='resultTable']//following::*[text()='XXX']";  // records in table
     private String selRecord = "//*[@checkbox']//following::*[@value='X']";
     private String actualAlertMsg = "//*[@id='customerList']//following::*[text()='Delete records?']";
     private String btnAlertOK = "//*[@id='customerList']//following::*[@value='Ok']";
     private String btnAlertCancel = "//*[@id='customerList']//following::*[@value='Cancel']";
     private String msgSuccess = "//*[@id='successBodyEdit']";
     private String msgDelete = "//*[@id='successBodyDelete']";
+    private String editShift = "//*[@id='resultTable']//following::*[text()='XXX']";
+    private String ShiftName1;
 
     public JobShiftPage(WebDriver driver) {
         super(driver);
     }
 
-    public void clickDeleteBtn(String expDeleteMsg) {
+    Random rand = new Random();
+    int upperbound = 5;
+
+    public void commonAdd(String action,String FromTime, String ToTime,String EmpName){
+        click(By.xpath(btnAdd));
+        this.ShiftName1 = "SHA"+ rand.nextInt(upperbound);
+        setText(By.xpath(txtShift), ShiftName1);
+        //   selectDropdown(FromTime,ToTime);
+        select(By.xpath(selWSFrom), FromTime);
+        select(By.xpath(selWSTo), ToTime);
+        select(By.xpath(selAvlEmp), EmpName);  //  SelectEmployee(EmpName);
+        click(By.xpath(clkAdd));           // clickAddEmp();
+
+        switch (action){
+            case "add":
+            {
+                click(By.xpath(btnSave));  // clickSave(msgExp);
+                Assert.assertTrue(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
+                        ,"Record not added");
+                break;
+            }
+            case "addCancel":{
+                click(By.xpath(btnCancel));                    //clickCancel;
+                //Check is "work Shifts" is visible
+                Assert.assertFalse(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
+                        ,"Record added");
+                break;
+            }
+        }
+    }
+
+    public void deleteShifts(String Record, String msg){
+        // selCheckBox;
+        click(By.xpath(selRecord.replace("X", Record)));
+        // clickDeleteBtn;
         click(By.xpath(btnDelete));
         click(By.xpath(btnAlertOK));
-      // check message successfully deleted
-        Assert.assertEquals(By.xpath(msgDelete),expDeleteMsg,"Record not Deleted");
+        // check message successfully deleted
+        //  Assert.assertEquals(By.xpath(msgDelete),expDeleteMsg,"Record not Deleted");
 
     }
-    public void clickCancelDeleteBtn(String expAlertMsg) {
-        click(By.xpath(btnDelete));
+
+    public void cancelDeleteShifts(String Record){
+        click(By.xpath(selRecord.replace("X", Record)));  //  selCheckBox;
+        click(By.xpath(btnDelete));          // clickCancelDeleteBtn;
         click(By.xpath(btnAlertCancel));
     }
 
-
-    public void addBtnClick(String ShiftName) {
-        click(By.xpath(btnAdd));
-        setText(By.xpath(txtShift), ShiftName);
-        //select(By.xpath(selWSFrom),FromTime);
-        // select(By.xpath(selWSTo),ToTime);
-    }
-
-    public void selectDropdown(String FromTime, String ToTime) {
-        select(By.xpath(selWSFrom), FromTime);
+    public void modifyJobShift(String newShift,String FromTime, String ToTime,String EmpName){
+        click(By.xpath(editShift.replace("XXX",ShiftName1)));   // click the selected shift
+        setText(By.xpath(txtShift), newShift);
+        select(By.xpath(selWSFrom), FromTime);          //   selectDropdown(FromTime,ToTime);
         select(By.xpath(selWSTo), ToTime);
-    }
-
-    public void SelectEmployee(String employees) {
-        select(By.xpath(selAvlEmp), employees);
-    }
-
-    public void clickAddEmp() {   // click Add button
+        select(By.xpath(selAvlEmp), EmpName);
         click(By.xpath(clkAdd));
-    }
-
-    public void clickRemove() {    // click Remove button
-        click(By.xpath(clkRemove));
-    }
-
-    public void clickSave(String msgExp) {    // Click SAVE button
         click(By.xpath(btnSave));
-        // Successfully saved message should appear
-        String msgActual = getText(By.xpath(msgSuccess));
-        Assert.assertEquals(msgActual, msgExp, "Record not Saved");  // check Successfully saved message
-    }
 
-    public void clickCancel() {    // CANCEL operation
-        click(By.xpath(btnCancel));
-        //Check is "work Shifts" is visible
-        Assert.assertTrue(isElementVisible(By.xpath(workShift)), "Work Shifts displayed");
-    }
-
-
-
-    public void selCheckBox(String value) { // selecting check box
-        click(By.xpath(selRecord.replace("X", value)));
     }
 
 }

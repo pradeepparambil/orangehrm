@@ -21,11 +21,12 @@ public class NationalityPage extends PageBase {
     private String chkbox="//*[text()='YYY']//preceding::input[@type='checkbox'][1]";
     private String btnDelete="//input[@id='btnDelete']";
     private String confirmDelete="//input[@id='dialogDeleteBtn']";
+    String nationality = "Country"+ UUID.randomUUID();
 
 
     public void addNationality(){
         click(By.xpath(btnAdd));
-        String nationality = "Country"+ UUID.randomUUID();
+
         setText(By.xpath(txtName),nationality);
         click(By.xpath(btnSave));
         Assert.assertTrue(isElementVisible(By.xpath(lblNationality.replace("XXX",nationality)))
@@ -33,15 +34,11 @@ public class NationalityPage extends PageBase {
 
     }
     public void deleteNationality(){
-        //*[text()='American']//preceding::input[@type='checkbox'][1]
-        click(By.xpath(btnAdd));
-        String nationality1 ="Country"+UUID.randomUUID();
-        setText(By.xpath(txtName),nationality1);
-        click(By.xpath(btnSave));
-        click(By.xpath(chkbox.replace("YYY",nationality1)));
+        addNationality();
+        click(By.xpath(chkbox.replace("YYY",nationality)));
         click(By.xpath(btnDelete));
         click(By.xpath(confirmDelete));
-       Assert.assertFalse( isElementVisible(By.xpath(lblNationality.replace("XXX",nationality1)))
+       Assert.assertFalse( isElementVisible(By.xpath(lblNationality.replace("XXX",nationality)))
                 ,"Nationality not deleted");
     }
 

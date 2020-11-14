@@ -16,13 +16,13 @@ public class VacancyTests extends TestBase {
         @Test
         public void addVacancyTest(){
             new VacancyPage(driver)
-                    .addNewVacancy("QA Engineer", "Bettin", "John Smith");
+                    .addNewVacancy("QA Engineer", "QA Lead-1", "John Smith");
         }
 
         @Test
         public void addDuplicateTest(){
             new VacancyPage(driver)
-                    .addDuplicateVacancy("QA Engineer", "Kurian", "John Smith");
+                    .addDuplicateVacancy("QA Engineer", "QA Lead-2", "John Smith");
         }
 
 

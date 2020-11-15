@@ -21,20 +21,19 @@ public class NationalityPage extends PageBase {
     private String chkbox="//*[text()='YYY']//preceding::input[@type='checkbox'][1]";
     private String btnDelete="//input[@id='btnDelete']";
     private String confirmDelete="//input[@id='dialogDeleteBtn']";
-    String nationality = "Country"+ UUID.randomUUID();
 
 
-    public void addNationality(){
+
+    public NationalityPage addNationality(String nationality){
         click(By.xpath(btnAdd));
 
         setText(By.xpath(txtName),nationality);
         click(By.xpath(btnSave));
         Assert.assertTrue(isElementVisible(By.xpath(lblNationality.replace("XXX",nationality)))
                 ,"Nationality not added");
-
+        return this;
     }
-    public void deleteNationality(){
-        addNationality();
+    public void deleteNationality(String nationality){
         click(By.xpath(chkbox.replace("YYY",nationality)));
         click(By.xpath(btnDelete));
         click(By.xpath(confirmDelete));

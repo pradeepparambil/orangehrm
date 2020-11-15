@@ -12,7 +12,7 @@ public class EmployeeStatusTest extends TestBase {
                     .login("Admin","admin123")
                     .selectMenu("Admin|Job|Employment Status");
             new EmployeeStatus(driver)
-                    .addStatus("Full Time freelancer5");
+                    .addStatus("adsds");
 
         }
         @Test
@@ -20,6 +20,7 @@ public class EmployeeStatusTest extends TestBase {
             new LoginPage(driver)
                     .login("Admin","admin123")
                     .selectMenu("Admin|Job|Employment Status");
+            new EmployeeStatus(driver).addStatus("dsddf");
             new EmployeeStatus(driver)
                     .deleteStatus();
 

@@ -1,50 +1,27 @@
 package ca.qaguru.tests;
 
 import ca.qaguru.lib.TestBase;
-import ca.qaguru.models.nationality.NationalityModel;
 import ca.qaguru.pages.NationalityPage;
 import ca.qaguru.pages.LoginPage;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.UUID;
-
 public class NationalityTests extends TestBase {
-    ObjectMapper objectMapper = new ObjectMapper();
-    @Test(dataProvider = "getNationalities", dataProviderClass = NationalityTestData.class)
-    public void addNationality(String resource) throws IOException {
-        NationalityModel natData = getNationalityData(resource);
+    @Test
+    public void addNationality(){
         new LoginPage(driver)
-                .login(natData.getUser().getUsername(),
-                        natData.getUser().getPassword())
+                .login("admin", "admin123")
                 .selectMenu("Admin|Nationalities");
-
         NationalityPage nationalityPage =new NationalityPage(driver);
-                nationalityPage.addNationality(natData.getNationality());
+        nationalityPage.addNationality();
+
     }
     @Test
-    public void deleteNationality() throws IOException {
-        NationalityModel natData = getNationalityData("testdata/nationality/nationality.json");
-
+    public void deleteNationality(){
         new LoginPage(driver)
-                .login(natData.getUser().getUsername(),
-                        natData.getUser().getPassword())
+                .login("admin", "admin123")
                 .selectMenu("Admin|Nationalities");
-        new NationalityPage(driver)
-                .addNationality(natData.getNationality())
-                .deleteNationality(natData.getNationality());
-    }
-
-    private NationalityModel getNationalityData(String resource) throws IOException {
-        URL url = getClass()
-                .getClassLoader()
-                .getResource(resource);
-        NationalityModel natData = objectMapper
-                .readValue(url,NationalityModel.class);
-        natData.setNationality(natData.getNationality()+ UUID.randomUUID());
-        return natData;
+        NationalityPage nationalityPage =new NationalityPage(driver);
+        nationalityPage.deleteNationality();
     }
 
 }

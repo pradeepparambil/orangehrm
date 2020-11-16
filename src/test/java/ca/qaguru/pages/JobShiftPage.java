@@ -23,7 +23,7 @@ public class JobShiftPage extends PageBase {
     private String btnCancel = "//*[@id='btnCancel']";    // Cancel button
     private String workShift = "//*[@id='search-results']//following::*[text()='Work Shifts']";
     private String recTable = "//*[@id='resultTable']//following::*[text()='XXX']";  // records in table
-    private String selRecord = "//*[@checkbox']//following::*[@value='X']";
+    private String selRecord = "//*[text()='XXX']//preceding::input[@type='checkbox'][1]";
     private String actualAlertMsg = "//*[@id='customerList']//following::*[text()='Delete records?']";
     private String btnAlertOK = "//*[@id='customerList']//following::*[@value='Ok']";
     private String btnAlertCancel = "//*[@id='customerList']//following::*[@value='Cancel']";
@@ -67,22 +67,43 @@ public class JobShiftPage extends PageBase {
         }
     }
 
-    public void deleteShifts(String Record, String msg){
+
+    public void commonDelete(String Action){
         // selCheckBox;
-        click(By.xpath(selRecord.replace("X", Record)));
+        click(By.xpath(selRecord.replace("XXX", ShiftName1)));
         // clickDeleteBtn;
         click(By.xpath(btnDelete));
-        click(By.xpath(btnAlertOK));
-        // check message successfully deleted
-        //  Assert.assertEquals(By.xpath(msgDelete),expDeleteMsg,"Record not Deleted");
+        switch(Action){
+            case "delete":
+                click(By.xpath(btnAlertOK));
+                Assert.assertFalse(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
+                        ,"Record not deleted");
+                break;
+            case "cancelDel":
+                click(By.xpath(btnAlertCancel));
+                Assert.assertTrue(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
+                        ,"Record deleted");
+                break;
+
+        }
 
     }
-
-    public void cancelDeleteShifts(String Record){
-        click(By.xpath(selRecord.replace("X", Record)));  //  selCheckBox;
-        click(By.xpath(btnDelete));          // clickCancelDeleteBtn;
-        click(By.xpath(btnAlertCancel));
-    }
+//    public void deleteShifts(){
+//        // selCheckBox;
+//        click(By.xpath(selRecord.replace("XXX", ShiftName1)));
+//        // clickDeleteBtn;
+//        click(By.xpath(btnDelete));
+//        click(By.xpath(btnAlertOK));
+//        // check message successfully deleted
+//        //  Assert.assertEquals(By.xpath(msgDelete),expDeleteMsg,"Record not Deleted");
+//
+//    }
+//
+//    public void cancelDeleteShifts(){
+//        click(By.xpath(selRecord.replace("XXX", ShiftName1)));  //  selCheckBox;
+//        click(By.xpath(btnDelete));          // clickCancelDeleteBtn;
+//        click(By.xpath(btnAlertCancel));
+//    }
 
     public void modifyJobShift(String newShift,String FromTime, String ToTime,String EmpName){
         click(By.xpath(editShift.replace("XXX",ShiftName1)));   // click the selected shift

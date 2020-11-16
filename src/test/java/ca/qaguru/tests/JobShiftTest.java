@@ -24,15 +24,16 @@ public class JobShiftTest extends TestBase {
     public void cancelDeleteShifts() {    // Cancel Delete job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.cancelDeleteShifts("4");
+        JSPage.commonAdd("add","08:15", "16:00", "Dominic Chase");
+        JSPage.commonDelete("cancelDel");
     }
 
     @Test
     public void deleteShifts() {    // Delete job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.commonAdd("add","08:15", "16:00", "Dominic Chase");
-        JSPage.deleteShifts("3","successfully Deleted");
+        JSPage.commonAdd("add","08:15", "16:00", "Alice Duval");
+        JSPage.commonDelete("delete");
     }
 
     @Test

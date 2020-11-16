@@ -88,23 +88,6 @@ public class JobShiftPage extends PageBase {
         }
 
     }
-//    public void deleteShifts(){
-//        // selCheckBox;
-//        click(By.xpath(selRecord.replace("XXX", ShiftName1)));
-//        // clickDeleteBtn;
-//        click(By.xpath(btnDelete));
-//        click(By.xpath(btnAlertOK));
-//        // check message successfully deleted
-//        //  Assert.assertEquals(By.xpath(msgDelete),expDeleteMsg,"Record not Deleted");
-//
-//    }
-//
-//    public void cancelDeleteShifts(){
-//        click(By.xpath(selRecord.replace("XXX", ShiftName1)));  //  selCheckBox;
-//        click(By.xpath(btnDelete));          // clickCancelDeleteBtn;
-//        click(By.xpath(btnAlertCancel));
-//    }
-
     public void modifyJobShift(String newShift,String FromTime, String ToTime,String EmpName){
         click(By.xpath(editShift.replace("XXX",ShiftName1)));   // click the selected shift
         setText(By.xpath(txtShift), newShift);

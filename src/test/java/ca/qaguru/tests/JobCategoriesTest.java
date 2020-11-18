@@ -22,11 +22,13 @@ public class JobCategoriesTest extends TestBase {
 
     @Test
     public void delJobCategory(){
+        String  jobCategory = "JC"+ UUID.randomUUID();
         new LoginPage(driver)
                 .login("Admin", "admin123")
                 .selectMenu("Admin|Job|Job Categories");
-        JobCategoriesPage JCPage = new JobCategoriesPage(driver);
-        JCPage.delJobCategory("JC");
+        new JobCategoriesPage(driver)
+                .addJobCategory(jobCategory)
+                .delJobCategory(jobCategory);
 
     }
 

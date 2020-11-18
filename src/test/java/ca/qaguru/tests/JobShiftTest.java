@@ -3,9 +3,12 @@ package ca.qaguru.tests;
 import ca.qaguru.lib.TestBase;
 import ca.qaguru.pages.JobShiftPage;
 import ca.qaguru.pages.LoginPage;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.annotations.Test;
 
 public class JobShiftTest extends TestBase {
+
+    ObjectMapper objectMapper = new ObjectMapper();
     @Test
     public void addJobShift() {    // Adding job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
@@ -14,7 +17,7 @@ public class JobShiftTest extends TestBase {
     }
 
     @Test
-    public void addJobShiftCancel() {    // Cancelling job shift Add
+    public void cancelAddShifts() {    // Cancelling job shift Add
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
         JSPage.commonAdd("addCancel","09:15", "16:00", "Charlie Carter");

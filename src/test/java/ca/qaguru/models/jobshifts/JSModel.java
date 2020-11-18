@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class JobShiftsModel {
+public class JSModel {
         private UserModel user;
         private String ShiftName;
         private String action;

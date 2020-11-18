@@ -19,21 +19,26 @@ public class JobShiftTest extends TestBase {
         JSModel jsModel = objectMapper.readValue(url,JSModel.class);
         new LoginPage(driver).login(jsModel.getUser().getUsername(),jsModel.getUser().getPassword()).selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.commonAdd("add","09:15", "16:00", "Linda Jane Anderson");
+        JSPage.commonAdd(jsModel.getShiftname(),
+                         jsModel.getAction(),
+                         jsModel.getFromtime(),
+                         jsModel.getTotime(),
+                         jsModel.getEmployee());
+//        JSPage.commonAdd("ShiftA","add","09:15", "16:00", "Linda Jane Anderson");
     }
 
     @Test
     public void cancelAddShifts() {    // Cancelling job shift Add
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.commonAdd("addCancel","09:15", "16:00", "Charlie Carter");
+        JSPage.commonAdd("ShiftA","addCancel","09:15", "16:00", "Charlie Carter");
     }
 
     @Test
     public void cancelDeleteShifts() {    // Cancel Delete job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.commonAdd("add","08:15", "16:00", "Dominic Chase");
+        JSPage.commonAdd("ShiftA","add","08:15", "16:00", "Dominic Chase");
         JSPage.commonDelete("cancelDel");
     }
 
@@ -41,7 +46,7 @@ public class JobShiftTest extends TestBase {
     public void deleteShifts() {    // Delete job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.commonAdd("add","08:15", "16:00", "Alice Duval");
+        JSPage.commonAdd("ShiftA","add","08:15", "16:00", "Alice Duval");
         JSPage.commonDelete("delete");
     }
 
@@ -49,7 +54,7 @@ public class JobShiftTest extends TestBase {
     public void modifyJobShift() {    // Modifying job shift
         new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.commonAdd("add", "09:15", "16:00", "Russel Hamilton");
+        JSPage.commonAdd("ShiftA","add", "09:15", "16:00", "Russel Hamilton");
         JSPage.modifyJobShift("ShiftAWM2","08:30","16:30","Odis Adalwin");
     }
 }

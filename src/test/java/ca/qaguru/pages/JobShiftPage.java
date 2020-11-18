@@ -39,9 +39,9 @@ public class JobShiftPage extends PageBase {
     Random rand = new Random();
     int upperbound = 5;
 
-    public void commonAdd(String action,String FromTime, String ToTime,String EmpName){
+    public void commonAdd(String shiftname,String action,String FromTime, String ToTime,String EmpName){
         click(By.xpath(btnAdd));
-        this.ShiftName1 = "SHA"+ rand.nextInt(upperbound);
+        this.ShiftName1 = shiftname + rand.nextInt(upperbound);
         setText(By.xpath(txtShift), ShiftName1);
         //   selectDropdown(FromTime,ToTime);
         select(By.xpath(selWSFrom), FromTime);
@@ -67,13 +67,10 @@ public class JobShiftPage extends PageBase {
         }
     }
 
-
     public void commonDelete(String Action){
-        // selCheckBox;
-        click(By.xpath(selRecord.replace("XXX", ShiftName1)));
-        // clickDeleteBtn;
-        click(By.xpath(btnDelete));
-        switch(Action){
+         click(By.xpath(selRecord.replace("XXX", ShiftName1)));    // selCheckBox;
+         click(By.xpath(btnDelete));                                     // clickDeleteBtn;
+         switch(Action){
             case "delete":
                 click(By.xpath(btnAlertOK));
                 Assert.assertFalse(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
@@ -84,10 +81,9 @@ public class JobShiftPage extends PageBase {
                 Assert.assertTrue(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
                         ,"Record deleted");
                 break;
-
         }
-
     }
+
     public void modifyJobShift(String newShift,String FromTime, String ToTime,String EmpName){
         click(By.xpath(editShift.replace("XXX",ShiftName1)));   // click the selected shift
         setText(By.xpath(txtShift), newShift);

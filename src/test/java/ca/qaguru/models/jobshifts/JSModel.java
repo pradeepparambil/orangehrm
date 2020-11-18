@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JSModel {
         private UserModel user;
-        private String ShiftName;
+        private String shiftname;
         private String action;
-        private String FromTime;
-        private String ToTime;
+        private String fromtime;
+        private String totime;
         private String employee;
 }
 

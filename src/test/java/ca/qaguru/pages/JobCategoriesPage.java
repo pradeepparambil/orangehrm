@@ -5,8 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-import java.util.UUID;
-
 public class JobCategoriesPage extends PageBase {
 
     private String btnAdd ="//*[@id=\"btnAdd\"]";
@@ -15,8 +13,7 @@ public class JobCategoriesPage extends PageBase {
     private String btnCancel ="//*[@id=\"btnCancel\"]";
     private String lblJobCategory = "//*[text()='XXX']";
 
-    private String chkBox ="//*[text()='XXX']//preceding::input[@type='checkbox'][1]";
-    private String chkBoxSel = "//*[@id=\"ohrmList_chkSelectRecord_10\"]";
+    private String chkJobCategory ="//*[text()='XXX']//preceding::input[@type='checkbox'][1]";
     private String btnDelete = "//*[@id=\"btnDelete\"]";
     private String btnAlertOk ="//*[@id=\"dialogDeleteBtn\"]";
 
@@ -24,22 +21,23 @@ public class JobCategoriesPage extends PageBase {
         super(driver);
     }
 
-    public void addJobCategory(String jobCategory) {
+    public JobCategoriesPage addJobCategory(String jobCategory) {
         click(By.xpath(btnAdd));
         setText(By.xpath(txtName), jobCategory);
         click(By.xpath(btnSave));
         Assert.assertTrue(isElementVisible(By.xpath(lblJobCategory.replace("XXX", jobCategory)))
                 , "Job Category Not Added");
+        return this;
     }
 
-    public void delJobCategory(String jobCategory){
+    public JobCategoriesPage delJobCategory(String jobCategory){
 
-        click(By.xpath(chkBox.replace("YYY", jobCategory)));
+        click(By.xpath(chkJobCategory.replace("XXX", jobCategory)));
         click(By.xpath(btnDelete));
         click(By.xpath(btnAlertOk));
         Assert.assertFalse( isElementVisible(By.xpath(lblJobCategory.replace("XXX",jobCategory)))
                 ,"Job Category not deleted");
-
+        return this;
     }
 
 

@@ -40,13 +40,19 @@ public class JobCategoriesPage extends PageBase {
         return this;
     }
 
-    public JobCategoriesPage editJobCategory(String jobCategory){
+    public JobCategoriesPage editJobCategory(String jobCategory, String newJobCategory){
 
+    //    click(By.xpath(lblJobCategory.replace("XXX",jobCategory)));
+    //    setText(By.xpath(txtName), jobCategory);
+    //    click(By.xpath(btnSave));
+    //    Assert.assertTrue(isElementVisible(By.xpath(lblJobCategory.replace("XXX",
+    //            jobCategory)))
+    //            ,"Job Category not added ");
         click(By.xpath(lblJobCategory.replace("XXX",jobCategory)));
-        setText(By.xpath(txtName), jobCategory);
+        setText(By.xpath(txtName), newJobCategory);
         click(By.xpath(btnSave));
-        Assert.assertTrue(isElementVisible(By.xpath(lblJobCategory.replace("XXX", jobCategory)))
-                ,"Job Category not added ");
+        Assert.assertFalse(isElementVisible(By.xpath(lblJobCategory.replace(jobCategory,
+                newJobCategory))),"Job Category Not Edited");
         return this;
 
     }

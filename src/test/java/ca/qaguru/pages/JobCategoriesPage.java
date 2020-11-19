@@ -40,5 +40,16 @@ public class JobCategoriesPage extends PageBase {
         return this;
     }
 
+    public JobCategoriesPage editJobCategory(String jobCategory){
+
+        click(By.xpath(lblJobCategory.replace("XXX",jobCategory)));
+        setText(By.xpath(txtName), jobCategory);
+        click(By.xpath(btnSave));
+        Assert.assertTrue(isElementVisible(By.xpath(lblJobCategory.replace("XXX", jobCategory)))
+                ,"Job Category not added ");
+        return this;
+
+    }
+
 
 }

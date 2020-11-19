@@ -37,7 +37,7 @@ public class JobShiftPage extends PageBase {
     }
 
     Random rand = new Random();
-    int upperbound = 5;
+    int upperbound = 100;
 
     public void commonAdd(String shiftname,String action,String FromTime, String ToTime,String EmpName){
         click(By.xpath(btnAdd));

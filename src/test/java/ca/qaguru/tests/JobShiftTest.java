@@ -56,8 +56,8 @@ public class JobShiftTest extends TestBase {
         JSModel jsModel = commonFunctionality("testdata/jobshifts/modify/jsmodify1.json");
         JobShiftPage JSPage = new JobShiftPage(driver);
         jsModel.setModshiftname(jsModel.getModshiftname()+new Random().nextInt(10));
-        System.out.println(jsModel.getShiftname() + " " + jsModel.getModshiftname());
-        System.out.println();
+      //  System.out.println(jsModel.getShiftname() + " " + jsModel.getModshiftname());
+     //   System.out.println();
         JSPage.modifyJobShift(jsModel.getShiftname(),
                               jsModel.getModshiftname(),
                               jsModel.getModfromtime(),

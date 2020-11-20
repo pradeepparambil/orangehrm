@@ -26,7 +26,6 @@ public class NationalityPage extends PageBase {
 
     public NationalityPage addNationality(String nationality){
         click(By.xpath(btnAdd));
-
         setText(By.xpath(txtName),nationality);
         click(By.xpath(btnSave));
         Assert.assertTrue(isElementVisible(By.xpath(lblNationality.replace("XXX",nationality)))

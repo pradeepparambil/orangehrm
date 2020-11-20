@@ -4,23 +4,26 @@
     <test name="Chrome Tests" >
         <parameter name="browser" value="chrome"></parameter>
         <classes>
-            <class name="ca.qaguru.tests.LoginTest" />
-            <class name="ca.qaguru.tests.JobTitlesTest"></class>
+<!--            <class name="ca.qaguru.tests.LoginTest" />-->
+<!--            <class name="ca.qaguru.tests.JobTitleTest"></class>-->
+            <class name="ca.qaguru.tests.EmployeeStatusTest"></class>
         </classes>
     </test>
     <test name="Firefox Tests" >
         <parameter name="browser" value="firefox"></parameter>
         <classes>
-            <class name="ca.qaguru.tests.LoginTest" />
-            <class name="ca.qaguru.tests.JobTitlesTest"></class>
+<!--            <class name="ca.qaguru.tests.LoginTest" />-->
+<!--            <class name="ca.qaguru.tests.JobTitleTest"></class>-->
+            <class name="ca.qaguru.tests.EmployeeStatusTest"></class>
         </classes>
     </test>
 
     <test name="Safari Tests" >
         <parameter name="browser" value="safari"></parameter>
         <classes>
-            <class name="ca.qaguru.tests.LoginTest" />
-            <class name="ca.qaguru.tests.JobTitlesTest"></class>
+<!--            <class name="ca.qaguru.tests.LoginTest" />-->
+<!--            <class name="ca.qaguru.tests.JobTitleTest"></class>-->
+            <class name="ca.qaguru.tests.EmployeeStatusTest"></class>
         </classes>
     </test>
 </suite>

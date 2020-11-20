@@ -17,5 +17,9 @@ public class JSModel {
         private String fromtime;
         private String totime;
         private String employee;
+        private String modshiftname;
+        private String modfromtime;
+        private String modtotime;
+        private String modemployee;
 }
 

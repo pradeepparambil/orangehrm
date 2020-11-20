@@ -80,11 +80,13 @@ public class JobShiftPage extends PageBase {
         }
     }
 
-    public void modifyJobShift(String newShift,String FromTime, String ToTime,String EmpName){
-        click(By.xpath(editShift.replace("XXX",ShiftName1)));   // click the selected shift
+    public void modifyJobShift(String oldShiftName, String newShift,String FromTime, String ToTime,String EmpName){
+        click(By.xpath(editShift.replace("XXX",oldShiftName)));   // click the selected shift
         setText(By.xpath(txtShift), newShift);
         select(By.xpath(selWSFrom), FromTime);          //   selectDropdown(FromTime,ToTime);
         select(By.xpath(selWSTo), ToTime);
+        select(By.xpath(selAssignEmp),EmpName);
+        click(By.xpath(clkRemove));
         select(By.xpath(selAvlEmp), EmpName);
         click(By.xpath(clkAdd));
         click(By.xpath(btnSave));

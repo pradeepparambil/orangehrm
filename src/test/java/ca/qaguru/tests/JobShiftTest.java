@@ -5,6 +5,7 @@ import ca.qaguru.models.jobshifts.JSModel;
 import ca.qaguru.pages.JobShiftPage;
 import ca.qaguru.pages.LoginPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -49,12 +50,19 @@ public class JobShiftTest extends TestBase {
         JSPage.commonDelete("delete",jsModel.getShiftname());
     }
 
-    @Test
-    public void modifyJobShift() {    // Modifying job shift
-        new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
+  //  @Test(dataProvider = "modDataFiles",dataProviderClass =JobShiftTestData.class )
+   @Test
+    public void modifyJobShift() throws IOException {    // Modifying job shift
+        JSModel jsModel = commonFunctionality("testdata/jobshifts/modify/jsmodify1.json");
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.commonAdd("ShiftA","add", "09:15", "16:00", "Russel Hamilton");
-        JSPage.modifyJobShift("ShiftAWM2","08:30","16:30","Odis Adalwin");
+        jsModel.setModshiftname(jsModel.getModshiftname()+new Random().nextInt(10));
+        System.out.println(jsModel.getShiftname() + " " + jsModel.getModshiftname());
+        System.out.println();
+        JSPage.modifyJobShift(jsModel.getShiftname(),
+                              jsModel.getModshiftname(),
+                              jsModel.getModfromtime(),
+                              jsModel.getModtotime(),
+                              jsModel.getModemployee());
     }
 
     public JSModel commonFunctionality(String fileResource) throws IOException {

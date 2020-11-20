@@ -21,4 +21,13 @@ public class JobShiftTestData {
                 {"testdata/jobshifts/delete/jsdelete1.json"}
         };
     }
+
+    @DataProvider(name = "modDataFiles")
+    public Object[][] jsmodifyfiles() {
+        return new Object[][] {
+                {"testdata/jobshifts/modify/jsmodify1.json"},
+                {"testdata/jobshifts/modify/jsmodify2.json"},
+                {"testdata/jobshifts/modify/jsmodify3.json"}
+        };
+    }
 }

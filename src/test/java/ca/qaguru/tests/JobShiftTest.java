@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 
 public class JobShiftTest extends TestBase {
 
@@ -19,37 +20,33 @@ public class JobShiftTest extends TestBase {
         JSModel jsModel = commonFunctionality(fileResource);
     }
 
-    @Test
-    public void cancelAddShifts() throws IOException {    // Cancelling job shift Add
-        URL url = getClass().getClassLoader().getResource("testdata/jobshifts/jshiftsaddcancel1.json");
-        JSModel jsmodel = objectMapper.readValue(url,JSModel.class);
-        new LoginPage(driver).login(jsmodel.getUser().getUsername(),jsmodel.getUser().getPassword()).selectMenu("Admin|Job|Work Shifts");
-        JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.commonAdd(jsmodel.getShiftname(),
-                jsmodel.getAction(),
-                jsmodel.getFromtime(),
-                jsmodel.getTotime(),
-                jsmodel.getEmployee());
+//    @Test
+//    public void cancelAddShifts() throws IOException {    // Cancelling job shift Add
+//        URL url = getClass().getClassLoader().getResource("testdata/jobshifts/jshiftsaddcancel1.json");
+//        JSModel jsmodel = objectMapper.readValue(url,JSModel.class);
+//        new LoginPage(driver).login(jsmodel.getUser().getUsername(),jsmodel.getUser().getPassword()).selectMenu("Admin|Job|Work Shifts");
+//        JobShiftPage JSPage = new JobShiftPage(driver);
+//        JSPage.commonAdd(jsmodel.getShiftname(),
+//                jsmodel.getAction(),
+//                jsmodel.getFromtime(),
+//                jsmodel.getTotime(),
+//                jsmodel.getEmployee());
         //JSPage.commonAdd("ShiftA","addCancel","09:15", "16:00", "Charlie Carter");
-    }
+//    }
 
-    @Test
-    public void cancelDeleteShifts() {    // Cancel Delete job shift
-        new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
-        JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.commonAdd("ShiftA","add","08:15", "16:00", "Dominic Chase");
-        JSPage.commonDelete("cancelDel");
-    }
+//    @Test(dataProvider = "delDataFiles",dataProviderClass = JobShiftTestData.class)
+//    public void cancelDeleteShifts() {    // Cancel Delete job shift
+//        new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
+//        JobShiftPage JSPage = new JobShiftPage(driver);
+//        JSPage.commonAdd("ShiftA","add","08:15", "16:00", "Dominic Chase");
+//        JSPage.commonDelete("cancelDel", "ShiftA");
+//    }
 
-    @Test
-    public void deleteShifts() throws IOException {    // Delete job shift
-        URL url = getClass().getClassLoader().getResource("testdata/jobshifts/delete/jsdelete1.json");
-        JSModel jsModel = objectMapper.readValue(url,JSModel.class);
-        new LoginPage(driver).login(jsModel.getUser().getUsername(),
-                                    jsModel.getUser().getPassword()).selectMenu("Admin|Job|Work Shifts");
+    @Test(dataProvider = "delDataFiles",dataProviderClass = JobShiftTestData.class)
+    public void deleteShifts(String fileResource) throws IOException {    // Delete job shift
+        JSModel jsModel = commonFunctionality(fileResource);
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.commonAdd(jsModel.getShiftname(),jsModel.getAction(),jsModel.getFromtime(),jsModel.getTotime(),jsModel.getEmployee());
-        JSPage.commonDelete("delete");
+        JSPage.commonDelete("delete",jsModel.getShiftname());
     }
 
     @Test
@@ -63,6 +60,7 @@ public class JobShiftTest extends TestBase {
     public JSModel commonFunctionality(String fileResource) throws IOException {
         URL url = getClass().getClassLoader().getResource(fileResource);
         JSModel jsModel = objectMapper.readValue(url,JSModel.class);
+        jsModel.setShiftname(jsModel.getShiftname()+ new Random().nextInt(25));
         new LoginPage(driver).login(jsModel.getUser().getUsername(),jsModel.getUser().getPassword()).selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
         JSPage.commonAdd(jsModel.getShiftname(),

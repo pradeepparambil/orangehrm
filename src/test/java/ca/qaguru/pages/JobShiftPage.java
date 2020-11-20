@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class JobShiftPage extends PageBase {
     private String btnAdd = "//*[@id='btnAdd']";
-    private String btnDelete = "//*[@id='btnDelete']";
+    private String btnDelete = "//*[@class='top']//following::*[@id='btnDelete']";
     private String chkCommon = "//*[@id='ohrmList_chkSelectAll']";
     private String txtShift = "//*[@id='workShift_name']";    // Job_Shift_Name TextBox
     private String selWSFrom = "//*[@id='workShift_workHours_from']"; // WrokShift From
@@ -36,12 +36,8 @@ public class JobShiftPage extends PageBase {
         super(driver);
     }
 
-    Random rand = new Random();
-    int upperbound = 100;
-
-    public void commonAdd(String shiftname,String action,String FromTime, String ToTime,String EmpName){
+    public void commonAdd(String ShiftName1,String action,String FromTime, String ToTime,String EmpName){
         click(By.xpath(btnAdd));
-        this.ShiftName1 = shiftname + rand.nextInt(upperbound);
         setText(By.xpath(txtShift), ShiftName1);
         //   selectDropdown(FromTime,ToTime);
         select(By.xpath(selWSFrom), FromTime);
@@ -67,7 +63,7 @@ public class JobShiftPage extends PageBase {
         }
     }
 
-    public void commonDelete(String Action){
+    public void commonDelete(String Action,String ShiftName1){
          click(By.xpath(selRecord.replace("XXX", ShiftName1)));    // selCheckBox;
          click(By.xpath(btnDelete));                                     // clickDeleteBtn;
          switch(Action){

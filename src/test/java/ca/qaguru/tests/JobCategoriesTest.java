@@ -32,4 +32,16 @@ public class JobCategoriesTest extends TestBase {
 
     }
 
+    @Test
+    public void editJobCategory() {
+        String jobCategory = "JC" + UUID.randomUUID();
+        String newJobCategory = "nJC" +UUID.randomUUID();
+        new LoginPage(driver)
+                .login("Admin", "admin123")
+                .selectMenu("Admin|Job|Job Categories");
+        new JobCategoriesPage(driver)
+                .addJobCategory(jobCategory)
+                .editJobCategory(jobCategory,newJobCategory);
+    }
+
 }

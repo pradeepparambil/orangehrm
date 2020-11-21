@@ -68,7 +68,7 @@ public class JobShiftTest extends TestBase {
     public JSModel commonFunctionality(String fileResource) throws IOException {
         URL url = getClass().getClassLoader().getResource(fileResource);
         JSModel jsModel = objectMapper.readValue(url,JSModel.class);
-        jsModel.setShiftname(jsModel.getShiftname()+ new Random().nextInt(25));
+        jsModel.setShiftname(jsModel.getShiftname()+ new Random().nextInt(99999));
         new LoginPage(driver).login(jsModel.getUser().getUsername(),jsModel.getUser().getPassword()).selectMenu("Admin|Job|Work Shifts");
         JobShiftPage JSPage = new JobShiftPage(driver);
         JSPage.commonAdd(jsModel.getShiftname(),

@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class JobShiftPage extends PageBase {
     private String btnAdd = "//*[@id='btnAdd']";
-    private String btnDelete = "//*[@id='btnDelete']";
+    private String btnDelete = "//*[@class='top']//following::*[@id='btnDelete']";
     private String chkCommon = "//*[@id='ohrmList_chkSelectAll']";
     private String txtShift = "//*[@id='workShift_name']";    // Job_Shift_Name TextBox
     private String selWSFrom = "//*[@id='workShift_workHours_from']"; // WrokShift From
@@ -23,7 +23,7 @@ public class JobShiftPage extends PageBase {
     private String btnCancel = "//*[@id='btnCancel']";    // Cancel button
     private String workShift = "//*[@id='search-results']//following::*[text()='Work Shifts']";
     private String recTable = "//*[@id='resultTable']//following::*[text()='XXX']";  // records in table
-    private String selRecord = "//*[@checkbox']//following::*[@value='X']";
+    private String selRecord = "//*[text()='XXX']//preceding::input[@type='checkbox'][1]";
     private String actualAlertMsg = "//*[@id='customerList']//following::*[text()='Delete records?']";
     private String btnAlertOK = "//*[@id='customerList']//following::*[@value='Ok']";
     private String btnAlertCancel = "//*[@id='customerList']//following::*[@value='Cancel']";
@@ -36,12 +36,8 @@ public class JobShiftPage extends PageBase {
         super(driver);
     }
 
-    Random rand = new Random();
-    int upperbound = 5;
-
-    public void commonAdd(String action,String FromTime, String ToTime,String EmpName){
+    public void commonAdd(String ShiftName1,String action,String FromTime, String ToTime,String EmpName){
         click(By.xpath(btnAdd));
-        this.ShiftName1 = "SHA"+ rand.nextInt(upperbound);
         setText(By.xpath(txtShift), ShiftName1);
         //   selectDropdown(FromTime,ToTime);
         select(By.xpath(selWSFrom), FromTime);
@@ -67,28 +63,34 @@ public class JobShiftPage extends PageBase {
         }
     }
 
-    public void deleteShifts(String Record, String msg){
-        // selCheckBox;
-        click(By.xpath(selRecord.replace("X", Record)));
-        // clickDeleteBtn;
-        click(By.xpath(btnDelete));
-        click(By.xpath(btnAlertOK));
-        // check message successfully deleted
-        //  Assert.assertEquals(By.xpath(msgDelete),expDeleteMsg,"Record not Deleted");
-
+    public void commonDelete(String Action,String ShiftName1){
+        sleep(1000);
+         click(By.xpath(selRecord.replace("XXX", ShiftName1)));    // selCheckBox;
+         click(By.xpath(btnDelete));                                     // clickDeleteBtn;
+         switch(Action){
+            case "delete":
+                click(By.xpath(btnAlertOK));
+                Assert.assertFalse(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
+                        ,"Record not deleted");
+                break;
+            case "cancelDel":
+                click(By.xpath(btnAlertCancel));
+                Assert.assertTrue(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
+                        ,"Record deleted");
+                break;
+        }
     }
 
-    public void cancelDeleteShifts(String Record){
-        click(By.xpath(selRecord.replace("X", Record)));  //  selCheckBox;
-        click(By.xpath(btnDelete));          // clickCancelDeleteBtn;
-        click(By.xpath(btnAlertCancel));
-    }
-
-    public void modifyJobShift(String newShift,String FromTime, String ToTime,String EmpName){
-        click(By.xpath(editShift.replace("XXX",ShiftName1)));   // click the selected shift
+    public void modifyJobShift(String oldShiftName, String newShift,String FromTime, String ToTime,String EmpName){
+        sleep(1000);
+        click(By.xpath(editShift.replace("XXX",oldShiftName)));   // click the selected shift
         setText(By.xpath(txtShift), newShift);
         select(By.xpath(selWSFrom), FromTime);          //   selectDropdown(FromTime,ToTime);
         select(By.xpath(selWSTo), ToTime);
+
+//            select(By.xpath(selAssignEmp), EmpName);
+//            click(By.xpath(clkRemove));
+
         select(By.xpath(selAvlEmp), EmpName);
         click(By.xpath(clkAdd));
         click(By.xpath(btnSave));

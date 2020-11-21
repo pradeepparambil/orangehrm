@@ -5,7 +5,6 @@ import ca.qaguru.models.jobshifts.JSModel;
 import ca.qaguru.pages.JobShiftPage;
 import ca.qaguru.pages.LoginPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -18,7 +17,7 @@ public class JobShiftTest extends TestBase {
 
     @Test(dataProvider = "addDataFiles",dataProviderClass = JobShiftTestData.class)
     public void addJobShift(String fileResource) throws IOException {    // Adding job shift
-        JSModel jsModel = commonFunctionality(fileResource);
+        JSModel jsModel = readFunctionality(fileResource);
     }
 
 //    @Test
@@ -45,7 +44,7 @@ public class JobShiftTest extends TestBase {
 
     @Test(dataProvider = "delDataFiles",dataProviderClass = JobShiftTestData.class)
     public void deleteShifts(String fileResource) throws IOException {    // Delete job shift
-        JSModel jsModel = commonFunctionality(fileResource);
+        JSModel jsModel = readFunctionality(fileResource);
         JobShiftPage JSPage = new JobShiftPage(driver);
         JSPage.commonDelete("delete",jsModel.getShiftname());
     }
@@ -53,7 +52,7 @@ public class JobShiftTest extends TestBase {
   //  @Test(dataProvider = "modDataFiles",dataProviderClass =JobShiftTestData.class )
    @Test
     public void modifyJobShift() throws IOException {    // Modifying job shift
-        JSModel jsModel = commonFunctionality("testdata/jobshifts/modify/jsmodify1.json");
+        JSModel jsModel = readFunctionality("testdata/jobshifts/modify/jsmodify1.json");
         JobShiftPage JSPage = new JobShiftPage(driver);
         jsModel.setModshiftname(jsModel.getModshiftname()+new Random().nextInt(10));
       //  System.out.println(jsModel.getShiftname() + " " + jsModel.getModshiftname());
@@ -65,7 +64,7 @@ public class JobShiftTest extends TestBase {
                               jsModel.getModemployee());
     }
 
-    public JSModel commonFunctionality(String fileResource) throws IOException {
+    public JSModel readFunctionality(String fileResource) throws IOException {
         URL url = getClass().getClassLoader().getResource(fileResource);
         JSModel jsModel = objectMapper.readValue(url,JSModel.class);
         jsModel.setShiftname(jsModel.getShiftname()+ new Random().nextInt(99999));

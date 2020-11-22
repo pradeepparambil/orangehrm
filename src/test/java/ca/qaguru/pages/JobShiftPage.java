@@ -30,52 +30,52 @@ public class JobShiftPage extends PageBase {
     private String msgSuccess = "//*[@id='successBodyEdit']";
     private String msgDelete = "//*[@id='successBodyDelete']";
     private String editShift = "//*[@id='resultTable']//following::*[text()='XXX']";
-    private String ShiftName1;
+
 
     public JobShiftPage(WebDriver driver) {
         super(driver);
     }
 
-    public void commonAdd(String ShiftName1,String action,String FromTime, String ToTime,String EmpName){
+    public void commonAdd(String ShiftName,String FromTime, String ToTime,String EmpName,String Action){
         click(By.xpath(btnAdd));
-        setText(By.xpath(txtShift), ShiftName1);
+        setText(By.xpath(txtShift), ShiftName);
         //   selectDropdown(FromTime,ToTime);
         select(By.xpath(selWSFrom), FromTime);
         select(By.xpath(selWSTo), ToTime);
         select(By.xpath(selAvlEmp), EmpName);  //  SelectEmployee(EmpName);
         click(By.xpath(clkAdd));           // clickAddEmp();
 
-        switch (action){
+        switch (Action){
             case "add":
             {
                 click(By.xpath(btnSave));  // clickSave(msgExp);
-                Assert.assertTrue(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
+                Assert.assertTrue(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName)))
                         ,"Record not added");
                 break;
             }
             case "addCancel":{
                 click(By.xpath(btnCancel));                    //clickCancel;
                 //Check is "work Shifts" is visible
-                Assert.assertFalse(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
+                Assert.assertFalse(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName)))
                         ,"Record added");
                 break;
             }
         }
     }
 
-    public void commonDelete(String Action,String ShiftName1){
+    public void commonDelete(String ShiftName,String Action){
         sleep(1000);
-         click(By.xpath(selRecord.replace("XXX", ShiftName1)));    // selCheckBox;
+         click(By.xpath(selRecord.replace("XXX", ShiftName)));    // selCheckBox;
          click(By.xpath(btnDelete));                                     // clickDeleteBtn;
          switch(Action){
             case "delete":
                 click(By.xpath(btnAlertOK));
-                Assert.assertFalse(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
+                Assert.assertFalse(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName)))
                         ,"Record not deleted");
                 break;
             case "cancelDel":
                 click(By.xpath(btnAlertCancel));
-                Assert.assertTrue(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName1)))
+                Assert.assertTrue(isElementVisible(By.xpath(recTable.replace("XXX",ShiftName)))
                         ,"Record deleted");
                 break;
         }

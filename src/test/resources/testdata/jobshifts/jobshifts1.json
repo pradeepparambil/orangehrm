@@ -7,5 +7,7 @@
   "action"   : "add",
   "fromtime" : "09:00",
   "totime"   : "16:00",
-  "employee" : "Peter Mac Anderson"
+  "employee" : "Peter Mac Anderson",
+  "canceladdaction" : "addCancel",
+  "canceladdemployee" : "Cecil Bonaparte"
 }

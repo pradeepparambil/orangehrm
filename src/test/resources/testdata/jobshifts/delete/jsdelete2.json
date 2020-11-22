@@ -7,5 +7,6 @@
   "action"   : "add",
   "fromtime" : "07:30",
   "totime"   : "15:00",
-  "employee" : "Dominic Chase"
+  "employee" : "Nathan Elliot",
+  "delcancelemployee": "Maggie Manning"
 }

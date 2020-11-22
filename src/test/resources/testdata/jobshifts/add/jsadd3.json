@@ -7,5 +7,13 @@
   "action"   : "add",
   "fromtime" : "08:30",
   "totime"   : "16:30",
-  "employee" : "Linda Jane Anderson"
+  "employee" : "Linda Jane Anderson",
+  "canceladdaction" : "addCancel",
+  "canceladdemployee" : "Dominic Chase",
+  "modaddemployee" : "Melan Peiris",
+  "modshiftname": "ShiftM",
+  "modaction"   : "modify",
+  "modfromtime" : "10:30",
+  "modtotime"   : "16:00",
+  "modemployee" : "John Smith"
 }

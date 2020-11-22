@@ -16,47 +16,63 @@ public class JobShiftTest extends TestBase {
     ObjectMapper objectMapper = new ObjectMapper();
 
     @Test(dataProvider = "addDataFiles",dataProviderClass = JobShiftTestData.class)
-    public void addJobShift(String fileResource) throws IOException {    // Adding job shift
+    public void addJobShift(String fileResource) throws IOException {
         JSModel jsModel = readFunctionality(fileResource);
+        JobShiftPage JSPage = new JobShiftPage(driver);
+        JSPage.commonAdd(jsModel.getShiftname(),
+                jsModel.getFromtime(),
+                jsModel.getTotime(),
+                jsModel.getEmployee(),
+                jsModel.getAction());// Adding job shift
     }
 
-//    @Test
-//    public void cancelAddShifts() throws IOException {    // Cancelling job shift Add
-//        URL url = getClass().getClassLoader().getResource("testdata/jobshifts/jshiftsaddcancel1.json");
-//        JSModel jsmodel = objectMapper.readValue(url,JSModel.class);
-//        new LoginPage(driver).login(jsmodel.getUser().getUsername(),jsmodel.getUser().getPassword()).selectMenu("Admin|Job|Work Shifts");
-//        JobShiftPage JSPage = new JobShiftPage(driver);
-//        JSPage.commonAdd(jsmodel.getShiftname(),
-//                jsmodel.getAction(),
-//                jsmodel.getFromtime(),
-//                jsmodel.getTotime(),
-//                jsmodel.getEmployee());
-        //JSPage.commonAdd("ShiftA","addCancel","09:15", "16:00", "Charlie Carter");
-//    }
+    @Test(dataProvider = "addDataFiles",dataProviderClass = JobShiftTestData.class)
+    public void cancelAddShifts(String fileResource) throws IOException {    // Cancelling job shift Add
+        JSModel jsModel = readFunctionality(fileResource);
+        JobShiftPage JSPage = new JobShiftPage(driver);
+        JSPage.commonAdd(jsModel.getShiftname(),
+                         jsModel.getFromtime(),
+                         jsModel.getTotime(),
+                         jsModel.getCanceladdemployee(),
+                         jsModel.getCanceladdaction());
+    }
 
-//    @Test(dataProvider = "delDataFiles",dataProviderClass = JobShiftTestData.class)
-//    public void cancelDeleteShifts() {    // Cancel Delete job shift
-//        new LoginPage(driver).login("Admin", "admin123").selectMenu("Admin|Job|Work Shifts");
-//        JobShiftPage JSPage = new JobShiftPage(driver);
-//        JSPage.commonAdd("ShiftA","add","08:15", "16:00", "Dominic Chase");
-//        JSPage.commonDelete("cancelDel", "ShiftA");
-//    }
+
 
     @Test(dataProvider = "delDataFiles",dataProviderClass = JobShiftTestData.class)
     public void deleteShifts(String fileResource) throws IOException {    // Delete job shift
-        JSModel jsModel = readFunctionality(fileResource);
+        JSModel jsModel = readFunctionality(fileResource);      // Adding job shift
         JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.commonDelete("delete",jsModel.getShiftname());
+        JSPage.commonAdd(jsModel.getShiftname(),
+                jsModel.getFromtime(),
+                jsModel.getTotime(),
+                jsModel.getEmployee(),
+                jsModel.getAction());
+        JSPage.commonDelete(jsModel.getShiftname(),"delete");
     }
 
-  //  @Test(dataProvider = "modDataFiles",dataProviderClass =JobShiftTestData.class )
-   @Test
-    public void modifyJobShift() throws IOException {    // Modifying job shift
-        JSModel jsModel = readFunctionality("testdata/jobshifts/modify/jsmodify1.json");
+    @Test(dataProvider = "delDataFiles",dataProviderClass = JobShiftTestData.class)
+    public void cancelDeleteShifts(String fileResource) throws IOException {    // Cancel Delete job shift
+        JSModel jsModel = readFunctionality(fileResource);      // Adding job shift
         JobShiftPage JSPage = new JobShiftPage(driver);
+        JSPage.commonAdd(jsModel.getShiftname(),
+                jsModel.getFromtime(),
+                jsModel.getTotime(),
+                jsModel.getDelcancelemployee(),
+                jsModel.getAction());
+        JSPage.commonDelete(jsModel.getShiftname(),"cancelDel");
+    }
+
+    @Test(dataProvider = "addDataFiles",dataProviderClass = JobShiftTestData.class)
+    public void modifyJobShift(String fileResource) throws IOException {    // Modifying job shift
+       JSModel jsModel = readFunctionality(fileResource);
+       JobShiftPage JSPage = new JobShiftPage(driver);
+       JSPage.commonAdd(jsModel.getShiftname(),       // Adding job shift
+                       jsModel.getFromtime(),
+                       jsModel.getTotime(),
+                       jsModel.getModaddemployee(),
+                       jsModel.getAction());
         jsModel.setModshiftname(jsModel.getModshiftname()+new Random().nextInt(10));
-      //  System.out.println(jsModel.getShiftname() + " " + jsModel.getModshiftname());
-     //   System.out.println();
         JSPage.modifyJobShift(jsModel.getShiftname(),
                               jsModel.getModshiftname(),
                               jsModel.getModfromtime(),
@@ -69,12 +85,6 @@ public class JobShiftTest extends TestBase {
         JSModel jsModel = objectMapper.readValue(url,JSModel.class);
         jsModel.setShiftname(jsModel.getShiftname()+ new Random().nextInt(99999));
         new LoginPage(driver).login(jsModel.getUser().getUsername(),jsModel.getUser().getPassword()).selectMenu("Admin|Job|Work Shifts");
-        JobShiftPage JSPage = new JobShiftPage(driver);
-        JSPage.commonAdd(jsModel.getShiftname(),
-                jsModel.getAction(),
-                jsModel.getFromtime(),
-                jsModel.getTotime(),
-                jsModel.getEmployee());
         return jsModel;
     }
 }

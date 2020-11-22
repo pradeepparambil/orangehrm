@@ -1,0 +1,18 @@
+{
+  "user": {
+    "username": "admin",
+    "password" : "admin123"
+  },
+  "shiftname": "ShiftA",
+  "action"   : "add",
+  "fromtime" : "09:30",
+  "totime"   : "15:00",
+  "employee" : "Nina Patel",
+  "modshiftname": "ShiftM",
+   "modaction"   : "modify",
+  "modfromtime" : "06:30",
+  "modtotime"   : "12:00",
+  "modemployee" : "Sania Shaheen"
+}
+
+

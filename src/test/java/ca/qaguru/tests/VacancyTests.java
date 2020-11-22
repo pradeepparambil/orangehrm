@@ -4,7 +4,7 @@ import ca.qaguru.lib.TestBase;
 import ca.qaguru.pages.VacancyPage;
 import org.testng.annotations.Test;
 
-public class VacancyTests extends TestBase {
+public class  VacancyTests extends TestBase {
 
         @Test
         public void searchAllVacanciesTest(){

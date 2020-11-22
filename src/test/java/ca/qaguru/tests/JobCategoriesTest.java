@@ -2,10 +2,11 @@ package ca.qaguru.tests;
 
 import ca.qaguru.lib.TestBase;
 import ca.qaguru.pages.JobCategoriesPage;
-import ca.qaguru.pages.JobShiftPage;
 import ca.qaguru.pages.LoginPage;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+
+import java.util.UUID;
 
 public class JobCategoriesTest extends TestBase {
 
@@ -15,17 +16,32 @@ public class JobCategoriesTest extends TestBase {
                 .login("Admin", "admin123")
                 .selectMenu("Admin|Job|Job Categories");
         JobCategoriesPage JCPage = new JobCategoriesPage(driver);
-        JCPage.addJobCategory("Housekeeping");
-        JCPage.clickSave();
+        JCPage.addJobCategory("JC"+ UUID.randomUUID());
+
     }
 
     @Test
     public void delJobCategory(){
+        String  jobCategory = "JC"+ UUID.randomUUID();
         new LoginPage(driver)
                 .login("Admin", "admin123")
                 .selectMenu("Admin|Job|Job Categories");
-        JobCategoriesPage JCPage = new JobCategoriesPage(driver);
-        JCPage.deleteJobCategory("Housekeeping");
+        new JobCategoriesPage(driver)
+                .addJobCategory(jobCategory)
+                .delJobCategory(jobCategory);
+
+    }
+
+    @Test
+    public void editJobCategory() {
+        String jobCategory = "JC" + UUID.randomUUID();
+        String newJobCategory = "nJC" +UUID.randomUUID();
+        new LoginPage(driver)
+                .login("Admin", "admin123")
+                .selectMenu("Admin|Job|Job Categories");
+        new JobCategoriesPage(driver)
+                .addJobCategory(jobCategory)
+                .editJobCategory(jobCategory,newJobCategory);
     }
 
 }

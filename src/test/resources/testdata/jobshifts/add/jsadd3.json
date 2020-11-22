@@ -1,0 +1,11 @@
+{
+  "user": {
+    "username": "admin",
+    "password" : "admin123"
+  },
+  "shiftname": "ShiftA",
+  "action"   : "add",
+  "fromtime" : "08:30",
+  "totime"   : "16:30",
+  "employee" : "Linda Jane Anderson"
+}

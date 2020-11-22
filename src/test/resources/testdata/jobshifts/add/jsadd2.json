@@ -7,5 +7,13 @@
   "action"   : "add",
   "fromtime" : "08:00",
   "totime"   : "15:30",
-  "employee" : "Peter Mac Anderson"
+  "employee" : "Peter Mac Anderson",
+  "canceladdaction" : "addCancel",
+  "canceladdemployee" : "Charlie Carter",
+  "modaddemployee" : "Nina Patel",
+  "modshiftname": "ShiftM",
+  "modaction"   : "modify",
+  "modfromtime" : "06:30",
+  "modtotime"   : "12:00",
+  "modemployee" : "Sania Shaheen"
 }

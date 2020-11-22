@@ -7,5 +7,7 @@
   "action"   : "add",
   "fromtime" : "07:30",
   "totime"   : "15:00",
-  "employee" : "Kiyara Hu"
+  "employee" : "Goutam Ganesh",
+  "delcancelemployee": "Chenzira Chuki"
+
 }

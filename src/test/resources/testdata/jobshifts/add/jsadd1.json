@@ -7,5 +7,13 @@
   "action"   : "add",
   "fromtime" : "07:30",
   "totime"   : "15:00",
-  "employee" : "Odis Adalwin"
+  "employee" : "Odis Adalwin",
+  "canceladdaction" : "addCancel",
+  "canceladdemployee" : "Cecil Bonaparte",
+  "modaddemployee" : "Anthony Nolan",
+  "modshiftname": "ShiftM",
+  "modaction"   : "modify",
+  "modfromtime" : "10:30",
+  "modtotime"   : "16:00",
+  "modemployee" : "Joe Root"
 }

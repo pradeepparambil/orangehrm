@@ -1,36 +1,57 @@
 package ca.qaguru.tests;
 
 import ca.qaguru.lib.TestBase;
+import ca.qaguru.models.jobcategory.JCModel;
 import ca.qaguru.pages.JobCategoriesPage;
 import ca.qaguru.pages.LoginPage;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.UUID;
 
 public class JobCategoriesTest extends TestBase {
+    ObjectMapper objectMapper = new ObjectMapper();
+    @Test(dataProvider = "getJobCategory", dataProviderClass = JobCategoriesTestData.class)
+    public void addJobCategory(String resource) throws IOException {
 
-    @Test
-    public void addJobCategory(){
+        JCModel jcData = getJCData(resource);
+
         new LoginPage(driver)
-                .login("Admin", "admin123")
+                .login(jcData.getUser().getUsername()
+                        , jcData.getUser().getPassword())
                 .selectMenu("Admin|Job|Job Categories");
+
         JobCategoriesPage JCPage = new JobCategoriesPage(driver);
-        JCPage.addJobCategory("JC"+ UUID.randomUUID());
+        JCPage.addJobCategory(jcData.getJobCategory());
 
     }
 
     @Test
-    public void delJobCategory(){
-        String  jobCategory = "JC"+ UUID.randomUUID();
+    public void delJobCategory() throws IOException {
+
+        JCModel jcData = getJCData("testdata/jobcategory/jobcategory.json");
+
         new LoginPage(driver)
-                .login("Admin", "admin123")
+                .login(jcData.getUser().getUsername()
+                ,jcData.getUser().getPassword())
                 .selectMenu("Admin|Job|Job Categories");
         new JobCategoriesPage(driver)
-                .addJobCategory(jobCategory)
-                .delJobCategory(jobCategory);
-
+        .addJobCategory(jcData.getJobCategory())
+        .delJobCategory(jcData.getJobCategory());
     }
+
+    private JCModel getJCData(String resource) throws IOException {
+        URL url = getClass()
+                .getClassLoader()
+                .getResource(resource);
+        JCModel jcData = objectMapper.readValue(url,JCModel.class);
+        jcData.setJobCategory(jcData.getJobCategory()+ UUID.randomUUID());
+        return jcData;
+    }
+
 
     @Test
     public void editJobCategory() {

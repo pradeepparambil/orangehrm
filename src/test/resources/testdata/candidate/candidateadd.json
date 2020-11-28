@@ -1,0 +1,14 @@
+{
+  "user": {
+    "username" : "admin",
+    "password" : "admin123"
+  },
+  "firstname"  : "Joe",
+  "middlename" : "Mathew",
+  "lastname"   : "George",
+  "email"      : "geroge@gmail.com",
+  "contactno"  : "8766324569",
+  "candidatename":"Joe Mathew George"
+
+
+}

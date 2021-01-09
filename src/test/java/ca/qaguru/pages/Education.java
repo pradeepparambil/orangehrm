@@ -12,15 +12,16 @@ public class Education extends PageBase {
             super(driver);
 
         }
-        private String btnAdd ="//*[@id='btnAdd";
-        private String txtName ="//*[@id='education_name'";
-        private String btnSave="//*[@id='btnSave']";
+        private String btnAdd ="//input[@id='btnAdd";
+        private String txtName ="//input[@id='education_name']";
+        private String btnSave="//input[@id='btnSave']";
         private String lblEducation= "//*[text()='XXX']";
         private String Education = "BBA"+ UUID.randomUUID();
         private String chkbox="//*[text()='YYY']//preceding::input[@type='checkbox'][1]";
-        private String btnDelete="//*[@id='btnDel']";
+        private String btnDelete="//input[@id='btnDel']";
 
-        public void addEducation() {
+
+        public void addEducation(){
             click(By.xpath(btnAdd));
             setText(By.xpath(txtName),Education);
             click(By.xpath(btnSave));

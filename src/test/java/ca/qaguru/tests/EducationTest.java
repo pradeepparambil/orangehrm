@@ -10,14 +10,15 @@ public class EducationTest extends TestBase {
     public void addEducation(){
         new LoginPage(driver)
                 .login("admin","admin123")
-                .selectMenu("Admin||Qualifications|Education");
-        new Education(driver).addEducation();
+                .selectMenu("Admin|Qualifications|Education");
+        new Education(driver)
+                .addEducation();
     }
     @Test
     public void deleteEducation(){
         new LoginPage(driver)
                 .login("admin","admin123")
-                .selectMenu("Admin||Qualifications|Education");
+                .selectMenu("Admin|Qualifications|Education");
         new Education(driver).deleteEducation();}
 
 }
